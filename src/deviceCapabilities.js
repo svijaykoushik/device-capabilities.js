@@ -1,6 +1,7 @@
 /**
- * @author Vijaykoushik S. {@link https://svijaykoushik.github.io/|Author}
+ * @author Vijaykoushik S. {@link https://svijaykoushik.github.io/ | Author}
  * @copyright 2017 Vijaykoushik, S.
+ * @license {@link https://github.com/svijaykoushik/device-capabilities.js/blob/master/LICENSE | MIT License}
  */
 /**
  * Device namespace.

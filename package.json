@@ -1,0 +1,33 @@
+{
+  "name": "device-capabilities",
+  "version": "1.0.0",
+  "description": "\"detects the client device's capablility support\"",
+  "main": "device-capabilities.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svijaykoushik/device-capabilities.js.git"
+  },
+  "keywords": [
+    "js",
+    "touch",
+    "support",
+    "js",
+    "gamepad",
+    "support",
+    "browser",
+    "detection"
+  ],
+  "author": "Vijaykoushik, S.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/svijaykoushik/device-capabilities.js/issues"
+  },
+  "homepage": "https://github.com/svijaykoushik/device-capabilities.js#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^3.0.0"
+  }
+}
