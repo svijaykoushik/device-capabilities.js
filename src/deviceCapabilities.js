@@ -147,6 +147,11 @@ var Device = {
          */
         this.silk = false;
         /**
+         * @property is localstorage supported?
+         * @default
+         */
+        this.localStorage = false;
+        /**
          * @member {string} ua
          * @private
          */
@@ -246,6 +251,11 @@ var Device = {
         //Check canvas support
         if('CanvasRenderingContext2D' in window){
             this.canvas = true;
+        }
+
+        //Check localStorage support
+        if(!!localStorage){
+            this.localStorage = true;
         }
     }
 };
