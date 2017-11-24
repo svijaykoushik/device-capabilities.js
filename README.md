@@ -1,5 +1,5 @@
 # device-capabilities.js
-A JavaScript library that detects the client device's capabilities for support of several sensors like touch, motion and orientation sesnors and also provides out of the box support for browser detection and OS detection.
+A JavaScript library that detects the client device's capabilities for support of several sensors like touch, motion and orientation sesnors and also provides out of the box support for browser detection and OS/Platform detection.
 
 ## Description
 Device capabilites.js is a pure javascript library loosely based on the device module in Photonstrom's Phaser framework. The library is quick and simple to use. It can identify if the device is a desktop or mobile, detect the platform the device is running on and find out the name of the browser the library is running on.
@@ -53,15 +53,15 @@ Detectable Platforms are:
 10. Firefox OS
 
 ### Feature Detection
-The library has the ability to detect the following features supported by the browser and the device.
+The library has the ability to detect the following api features supported by the browser and the device.
 
 1. HTML5 Local storage
 2. HTML5 Canvas
-3. Touch sensor
-4. Geolocation sensor
-5. Motion sensor
-6. Orientation sensor
-7. Ambient light sensor
+3. Touch sensor api
+4. Geolocation sensor api
+5. Motion sensor api
+6. Orientation sensor api
+7. Ambient light sensor api
 
 ## Usage
 First, Download the device-capabilites.js library and include it in the html file

@@ -11,7 +11,7 @@
 var Device = {
     /**
      * @classdesc
-     * Identifies the device's capabilities.
+     * Detects the device and Identifies the device's capabilities.
      * @class
      * @public
      */
@@ -20,28 +20,32 @@ var Device = {
          * @property {boolean} desktop - is device a desktop?
          * @public
          * @default
+         * @readonly
          */
         this.desktop = false;
         /**
          * @property {boolean} gamepad - does device support gamepad api?
          * @public
          * @default
+         * @readonly
          */
         this.gamepad = false;
         /**
          * @property {boolean} canvas - is canvas supported?
          * @public
          * @default
+         * @readonly
          */
         this.canvas = false;
         /**
          * @property {boolean} mobile - is device a mobile device?
          * @public
-         * @default [false]
+         * @default
+         * @readonly
          */
         this.mobile = false;
         /**
-         * @property {Object} OS - Object wrapper for device's Operating system
+         * @property {Object} OS - Object wrapper for device's Operating system. Use the OS object's properties to determine the platform on which the device runs.
          * @property {boolean} OS.linux - is device running linux?
          * @property {boolean} OS.mac - is device running mac?
          * @property {boolean} OS.windowsPhone - is device running windows phone OS?
@@ -49,10 +53,11 @@ var Device = {
          * @property {boolean} OS.iOS - is device running iOS?
          * @property {boolean} OS.webOS - is device running WebOS?
          * @property {boolean} OS.kindle - is device a Kindle?
-         * @property {boolean} is device running Blackberry?
+         * @property {boolean} OS.blackberry - is device running Blackberry?
          * @property {boolean} OS.firefoxOS -  is device running Firefox OS?
          * @public
          * @default
+         * @readonly
          */
         this.OS = {
             windows: false,
@@ -67,10 +72,9 @@ var Device = {
             firefoxOS: false,
         };
         /**
-         * @property {Object} Browser - Object wrapper for device's browser.
+         * @property {Object} Browser - Object wrapper for device's browser. Use the Browser object's properties to determine the current browser of the device.
          * @property {boolean} Browser.chrome -   is chrome browser?
          * @property {boolean} Browser.fireFox - is Firefox browser?
-         * @property {boolean} Browser.opera - is Opera browser?
          * @property {boolean} Browser.opera - is Opera browser?
          * @property {boolean} Browser.safari - is Safari browser?
          * @property {boolean} Browser.edge - is Edge browser?
@@ -83,81 +87,38 @@ var Device = {
          * @property {boolean} Browser.silk - is silk browser for kinlde?
          * @public
          * @default
+         * @readonly
+         * @readonly
          */
-        this.Browser = {};
-        /**
-         * @property {boolean} Browser.chrome -   is chrome browser?
-         * @default
-         */
-        this.Browser.chrome = false;
-        /**
-         * @property {boolean} Browser.fireFox - is Firefox browser?
-         * @default
-         */
-        this.Browser.fireFox = false;
-        /**
-         * @property {boolean} Browser.opera - is Opera browser?
-         * @default
-         */
-        this.Browser.opera = false;
-        /**
-         * @property {boolean} Browser.safari - is Safari browser?
-         * @default
-         */
-        this.Browser.safari = false;
-        /**
-         * @property {boolean} Browser.edge - is Edge browser?
-         * @default
-         */
-        this.Browser.edge = false;
-        /**
-         * @property {boolean} Browser.ie - is IE browser?
-         * @default
-         */
-        this.Browser.ie = false;
-        /**
-         * @property {boolean} Browser.chromeMobile - is chrome browser for mobile?
-         * @default
-         */
-        this.Browser.chromeMobile = false;
-        /**
-         * @property {boolean} Browser.fireFoxMobile - is Firefox browser for mobile?
-         * @default
-         */
-        this.Browser.fireFoxMobile = false;
-        /**
-         * @property {boolean} Browser.ieMobile - is IE browser for mobile?
-         * @default
-         */
-        this.Browser.ieMobile = false;
-        /**
-         * @property {boolean} Browser.edgeMobile - is edge browser for mobile?
-         * @default
-         */
-        this.Browser.edgeMobile = false;
-        /**
-         * @property {boolean} Browser.androidBrowser - is android default browser?
-         * @default
-         */
-        this.Browser.androidBrowser = false;
-        /**
-         * @property {boolean} Browser.silk - is silk browser for kinlde?
-         * @default
-         */
-        this.Browser.silk = false;
+        this.Browser = {
+            chrome: false,
+            fireFox: false,
+            opera: false,
+            safari: false,
+            edge: false,
+            ie: false,
+            chromeMobile: false,
+            fireFoxMobile: false,
+            ieMobile: false,
+            edgeMobile: false,
+            androidBrowser: false,
+            silk: false
+        };
         /**
          * @property {boolean} localStorage - is localstorage supported?
          * @public
          * @default
+         * @readonly
          */
         this.localStorage = false;
         /**
          * @member {string} ua
          * @private
+         * @readonly
          */
         this.ua = navigator.userAgent.toLocaleLowerCase();
         /**
-         * @property {Object} Sensors - Object wrapper for device's sensors
+         * @property {Object} Sensors - Object wrapper for device's sensors. Use the Sensors object's properties to determine the different sensor apis suppported b the device.
          * @property {boolean} Sensors.geoLocation - is geolocation supported?
          * @property {boolean} Sensors.touch -  is touch available?
          * @property {boolean} Sensors.orientation -  is orientation sensor available?
@@ -165,43 +126,15 @@ var Device = {
          * @property {boolean} Sensors.ambientlight -  is ambient light sensor available?
          * @public
          * @default
+         * @readonly
          */
-        this.Sensors = {};
-
-        /**
-         * @property {boolean} Sensors.geoLocation - is geolocation supported?
-         * @public
-         * @default
-         */
-        this.Sensors.geolocation = false;
-        
-        /**
-         * @property {boolean} Sensors.touch -  is touch available?
-         * @public
-         * @default
-         */
-        this.Sensors.touch = false;
-        
-        /**
-         * @property {boolean} Sensors.orientation -  is orientation sensor available?
-         * @public
-         * @default
-         */
-        this.Sensors.orientation = false;
-        
-        /**
-         * @property {boolean} Sensors.motion -  is motion sensor available?
-         * @public
-         * @default
-         */
-        this.Sensors.motion = false;
-        
-        /**
-         * @property {boolean} Sensors.ambientlight -  is ambient light sensor available?
-         * @public
-         * @default
-         */
-        this.Sensors.ambientlight = false;
+        this.Sensors = {
+            geolocation: false,
+            touch: false,
+            orientation: false,
+            motion: false,
+            ambientlight: false
+        };
 
         // Check for OS of device
         if(/firefox/.test(this.ua) && !/windows/.test(this.ua) && !/linux/.test(this.ua) && !/mac os/.test(this.ua) &&!/android/.test(this.ua)){
