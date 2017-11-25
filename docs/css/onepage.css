@@ -1,0 +1,150 @@
+body{
+    margin: 0
+}
+.page-section{
+    width: 100%;
+    height: 100vh;
+    color: #ffffff;
+}
+.page-section .title, .page-section .desc{    
+    margin-left: 4%;
+    margin-right: 4%;
+}
+.page-section .title {
+    font-size: 4em;
+    position: relative;
+    top: 30%;
+    padding-bottom: 25px;
+}
+.page-section .desc {
+    font-size: 1.5em;
+    position: relative;
+    top: 35%;
+}
+.text-container, .img-container {
+    width: 50%;
+    position: relative;
+}
+#index{
+ background: linear-gradient(to bottom right, #43cea2, #43cea2); /* Standard syntax */
+ text-align: center;
+}
+#index .title{
+    padding-bottom: 0;
+}
+#index .img-desc{    
+    position: relative;
+    top: 46%;
+}
+#index .btn-container{
+    position: relative;
+    top: 40%;
+    text-align: center;
+    left: 50%;
+}
+#index .btn{
+    font-size: 2em;
+    border: 2px solid #ffffff;
+    width: 2em;
+    height: 2em;
+    line-height: 2;
+    border-radius: 50%;
+}
+#index .btn:focus:not(:active)::before {
+    outline: 0;
+    color: #fff;
+    animation: ripple 0.8s ease-out;
+}
+#index .btn:before {
+    content: '';
+    background-color: aliceblue;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scale(0.001,0.001);
+}
+#device{
+ background: linear-gradient(to bottom right, #1e130c, #9a8478); /* Standard syntax */
+ text-align: left;
+}
+#device .text-container{
+    position: relative;
+    top: 40%;
+    float: left;
+}
+#device .img-container{
+    float: right;
+}
+#device .img-desc{    
+    position: relative;
+    margin: 30%;
+}
+#browser{
+ background: linear-gradient(to bottom right, #73C8A9, #373B44); /* Standard syntax */
+ text-align: right;
+}
+#browser .text-container{
+    position: relative;
+    top: 40%;
+    float: right;
+}
+#browser .img-container{
+    float: left;
+}
+#browser .img-desc {
+    position: absolute;
+    left: 10%;
+    margin: 30%;
+}
+#platform{
+ background: linear-gradient(to bottom right, #00bf8f, #001510); /* Standard syntax */
+ text-align: left;
+}
+#platform .text-container{
+    position: relative;
+    top: 40%;
+    float: left;
+}
+#platform .img-container{
+    float: right;
+}
+#platform .img-desc {
+    position: absolute;
+    left: 10%;
+    margin: 30%;
+}
+#feature{
+ background: linear-gradient(to bottom right, #833ab4, #fd1d1d, #fcb045); /* Standard syntax */
+ text-align: right;
+}
+#feature .text-container{
+    position: relative;
+    top: 40%;
+    float: right;
+}
+#feature .img-container{
+    float: left;
+}
+#feature .img-desc {
+    position: absolute;
+    left: 10%;
+    margin: 30%;
+}
+@keyframes ripple{
+    50%{
+        transform: scale(1.5,1.5);
+        opacity: 0;
+    }
+    99%{
+        transform: scale(0.001, 0.001);
+        opacity: 0;
+    }
+    100%{
+        transform: scale(0.001, 0.001);
+        opacity: 1;
+    }
+}
