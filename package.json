@@ -28,6 +28,7 @@
   "homepage": "https://github.com/svijaykoushik/device-capabilities.js#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "gulp-webserver": "^0.9.1"
   }
 }
