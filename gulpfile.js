@@ -17,6 +17,7 @@ gulp.task('watch', function(){
 gulp.task('serveLocally',function(){
     return gulp.src("./docs")
     .pipe(serve({
+        host: '0.0.0.0',
         port:3000,
         liveReload: true
     }));
