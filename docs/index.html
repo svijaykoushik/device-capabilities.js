@@ -66,14 +66,97 @@
             </div>
         </section>
         <div class="support">
-            <p class="btn"><i class="fa fa-support"></i></p>
-            <ul>
-                <li><p class="sub-btn bg-pink"><a href="#!"><i class="fa fa-id-badge"></i></a></p></li>
-                <li><p class="sub-btn bg-purple"><a href="#!"><i class="fa fa-user-circle"></i></a></p></li>
-                <li><p class="sub-btn bg-red"><a href="#!"><i class="fa fa-book"></i></a></p></li>
+            <p class="btn" id="support"><i class="fa fa-support"></i></p>
+            <ul id="submenu">
+                <li><p class="sub-btn bg-pink"><a href="https://github.com/svijaykoushik/device-capabilities.js"><i class="fa fa-github"></i></a></p></li>
+                <li><p class="sub-btn bg-purple"><a href="https://svijaykoushik.github.io"><i class="fa fa-user-circle"></i></a></p></li>
+                <li><p class="sub-btn bg-red"><a href="/documentation/"><i class="fa fa-book"></i></a></p></li>
                 <li><p class="sub-btn bg-teal"><a href="#!"><i class="fa fa-laptop"></i></a></p></li>
-                <li><p class="sub-btn bg-orange"><a href="#!"><i class="fa fa-download"></i></a></p></li>
+                <li><p class="sub-btn bg-orange"><a href="https://github.com/svijaykoushik/device-capabilities.js/releases"><i class="fa fa-download"></i></a></p></li>
             </ul>
         </div>
+        <script>
+            (function(){
+                var btnCollection = document.getElementsByClassName("btn");
+                var subBtnCollection = document.getElementsByClassName("sub-btn");
+                var support = document.getElementById("support");
+
+                for(var i=0; i< btnCollection.length; i++){
+                    btnCollection[i].addEventListener("click",function(e){
+                        addClasss(this, 'btn-ripple');
+                        this.addEventListener('animationend',animationendEventHandler);
+                    });
+                }
+                
+                for(var i=0; i< subBtnCollection.length; i++){
+                    subBtnCollection[i].addEventListener("click",function(e){
+                        addClasss(this, 'sub-btn-ripple');
+                        this.addEventListener('animationend',subBtnAnimationend);
+                    });
+                }
+
+                support.addEventListener("click", toggleSupportMenu);
+
+                /**
+                 * subBtnAnimationend event handler
+                */
+               function subBtnAnimationend(event){
+                   removeClasss(this,"sub-btn-ripple");
+                   console.info("sub-btn animation complete");
+               }
+                
+                /**
+                 * AnimationEnd event handler
+                */
+               function animationendEventHandler(event){
+                   removeClasss(this,"btn-ripple");
+                   console.info("animation complete");
+               }
+
+               /**
+                * Add a CSS class to an element
+               */
+               function addClasss(element, className){
+                   element.classList.add(className);
+               }
+
+               
+               /**
+                * Add a CSS class to an element
+               */
+               function removeClasss(element, className){
+                   element.classList.remove(className);
+               }
+
+                function toggleClass(element,className){
+                    if(element.classList){
+                        element.classList.toggle(className);
+                    }
+                    else{
+                        /**
+                        * Fallback for IE9
+                        */
+                        var classes = element.className.split(" ");
+                        var i = classes.indexOf(className);
+                        if(i>=0)
+                            classes.splice(i,1);
+                        else
+                            classes.push(className);
+                        element.className = classes.join(" ");
+                    }
+                    console.info("class toggled");
+                }
+            
+                function toggleSupportMenu(event){
+                    var list = document.getElementById("submenu");
+                    var listItemCollection = list.getElementsByTagName("li");
+                    toggleClass(list, "visible");
+                    for(var i=0; i< listItemCollection.length; i++){
+                        toggleClass(listItemCollection[i],"liAnimation");
+                    }
+                }
+            })();
+            //# sourceURL=appPage.js
+        </script>
     </body>
 </html>
