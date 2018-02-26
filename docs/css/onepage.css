@@ -146,6 +146,7 @@ body{
     position: fixed;
     bottom: 1em;
     right: 1em;
+    z-index: 6;
 }
 .support .btn, .support ul>li .sub-btn{   
     background-color: #3F51B5;
@@ -273,6 +274,67 @@ body{
     float: left;
 }
 
+footer{
+    width: 100%;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    padding: 12px 0 0 0;
+    background: #bc4e9c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f80759, #bc4e9c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+footer .f-container{
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: auto;
+}
+
+.f-container:first-child {
+    padding: 24px;
+}
+
+footer .f-section{
+    width: 100%;
+    /*padding: 0 0 0 12px*/
+}
+
+footer .f-list{
+    list-style-type: none;
+}
+
+footer .f-list li:not(:last-child){
+    margin-bottom: 5px;
+}
+
+footer a.f-link, a.f-link:visited{
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .f-copy{
+    width: 100%;
+    position: relative;
+    padding: 10px 0 10px 0;   
+    background: rgba(0, 0, 0, 0.2);
+}
+
+footer .f-copy::after{    
+    position: absolute;
+    content: ' ';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    -webkit-filter: blur(3px); /* Safari 6.0 - 9.0 */
+    filter: blur(3px);
+    background-blend-mode: exclusion;
+}
+
+footer .f-copy p{
+    text-align: center;
+}
+
 @media screen and (min-width:1008px){
     .page-section{
         height: 100vh;
@@ -356,6 +418,14 @@ body{
     }
     #feature .img-desc {
         margin: 30%;
+    }
+
+    footer{
+        padding: 24px 0 0 0;
+    }
+
+    footer .f-container{
+        grid-template-columns: auto auto auto;
     }
 
     /*.support{
