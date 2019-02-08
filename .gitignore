@@ -50,3 +50,4 @@ Temporary Items
 .vscode/*
 node_modules/*
 out/*
+release/*
