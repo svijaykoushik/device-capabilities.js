@@ -246,7 +246,7 @@ var Device = {
         }
 
         //Check orientation support
-        if(!!window.ondevicemotion){
+        if(!!window.ondeviceorientation){
             this.Sensors.orientation = true;
         }
         
