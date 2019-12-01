@@ -22,3 +22,16 @@ gulp.task('serveLocally',function(){
         liveReload: true
     }));
 });
+
+/**
+ *  Run the test runner
+ */
+gulp.task('runTest',function(){
+    gulp.src("./src/deviceCapabilities.js").pipe(gulp.dest("./tests"));
+    return gulp.src("./tests")
+    .pipe(serve({
+        host: '0.0.0.0',
+        port:3001,
+        liveReload: true
+    }));
+});
