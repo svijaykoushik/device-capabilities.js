@@ -2,22 +2,23 @@
 
 nav {
     flex-direction: row;
-    font-size: 25px;
-    height: 50px;
-}
-
-nav .brand {
-    letter-spacing: 15px;
+    font-size: 20px;
+    height: 70px;
 }
 
 nav ul{    
     flex-direction: row;
     justify-content: space-around;
+    position: static;
+    width: 50%;
+    background: initial;
+    transform: none;
+    animation: none;
 }
 
-nav ul li a:hover {
-    background: rgba(0, 0, 0, 0.3);
-    transition: 240ms ease-out;
+nav ul li{
+    opacity: initial;
+    transition: initial;
 }
 
 section {
@@ -58,4 +59,8 @@ footer {
 footer .f-container {
     flex-direction: row;
     justify-content: space-around;
+}
+
+.burger{
+    display: none;
 }
