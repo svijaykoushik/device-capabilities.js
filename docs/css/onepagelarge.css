@@ -1,0 +1,30 @@
+nav {
+    font-size: 25px;
+}
+
+nav .brand {
+    letter-spacing: 15px;
+}
+
+section .title {
+    font-size: 70px;
+}
+
+section .desc {
+    font-size: 25px;
+}
+
+#index .btn {
+    font-size: 64px;
+    width: 128px;
+    height: 128px;
+}
+
+#index .btn:not(:active)::before {
+    width: 128px;
+    height: 128px;
+}
+
+footer .f-list{
+    font-size: 20px;
+}
