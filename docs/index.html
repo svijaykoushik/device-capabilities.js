@@ -8,28 +8,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/d902360c6f.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300|Open+Sans:300" rel="stylesheet"> 
-        <link rel="stylesheet" type="text/css" href="./css/onepage.css">
+        <link rel="stylesheet" type="text/css" href="./css/onepagemobile.css">
+        <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="./css/onepage.css">
     </head>
     <body>
-        <!--<nav class="nav">
+        <nav>
+            <div class="brand">device-capabilities.js</div>
             <ul>
-                <li class="title">device-capabilities.js</li>
+                <li><a href="#">Download</a></li>
                 <li><a href="#">Documentation</a></li>
                 <li><a href="#">Source</a></li>
             </ul>
-        </nav>-->
-
         </nav>
-        <section id="index" class="page-section">
+        <section id="index">
             <div class="title">device-capabilities.js</div>
             <div class="desc">
-                A JavaScript plugin that detects the client device's capabilities for support of several sensors like touch, motion and orientation sesnors and also provides out of the box support for browser detection and OS/Platform detection.
+                A JavaScript plugin that detects the client device's capabilities for support of several sensors like touch, motion
+                and orientation sensors and also provides out of the box support for browser detection and OS/Platform detection.
             </div>
             <div class="btn-container">
                 <p class="btn"><i class="fa fa-download"></i></p>
             </div>
         </section>
-        <section id="device" class="page-section">
+        <section id="device">
             <div class="text-container">
                 <div class="title">Device detection</div>
                 <div class="desc">Detecting the type of device your site has been loaded in is now made easy. Attract visitors by making your site respond to different type of devices</div>
@@ -38,16 +39,16 @@
                 <img class="img-desc" src="./img/device_detect.png"/>
             </div>
         </section>
-        <section id="browser" class="page-section">
-            <div class="img-container">
-                <img class="img-desc" src="./img/browser_det.png"/>
-            </div>
+        <section id="browser">
             <div class="text-container">
                 <div class="title">Browser detection</div>
                 <div class="desc">Finding out which browser the user accesses your site is a piece of cake with this plugin. Carter users with information based on their favourite browsers</div>
             </div>
+            <div class="img-container">
+                <img class="img-desc" src="./img/browser_det.png"/>
+            </div>
         </section>
-        <section id="platform" class="page-section">
+        <section id="platform">
             <div class="text-container">
                 <div class="title">Platform detection</div>
                 <div class="desc">Identifing the platform the device is running is made simple.You can quicly Identify the platform/os the device is running to optimize your site for different platforms.</div>
@@ -56,7 +57,7 @@
                 <img class="img-desc" src="./img/plaform_det.png"/>
             </div>
         </section>
-        <section id="feature" class="page-section">
+        <section id="feature">
             <div class="text-container">
                 <div class="title">Feature detection</div>
                 <div class="desc">Checking wether the user's device and browser supports device specific API is a breeze. Impress your users by displaying the device's specific abilities. </div>
@@ -65,14 +66,14 @@
                 <img class="img-desc" src="./img/feature_detect.png"/>
             </div>
         </section>
-        <div class="support">
+        <!--<div class="support">
             <p class="btn" id="support"><i class="fa fa-support"></i></p>
             <ul id="submenu">
                 <li><a href="/documentation/"><p class="sub-btn bg-red"><i class="fa fa-book"></i></a></p></li>
                 <li><p class="sub-btn bg-teal"><a href="#!"><i class="fa fa-laptop"></i></a></p></li>
                 <li><p class="sub-btn bg-orange"><a href="https://github.com/svijaykoushik/device-capabilities.js/releases"><i class="fa fa-download"></i></a></p></li>
             </ul>
-        </div>
+        </div>-->
         <footer>
             <div class="f-container">
                 <div class="f-section">
@@ -109,7 +110,7 @@
                     <a class="github-button" aria-label="Fork svijaykoushik/device-capabilities.js on GitHub" href="https://github.com/svijaykoushik/device-capabilities.js/fork" data-icon="octicon-repo-forked">Fork</a>
                 </p>
             </div>
-            <div class="f-copy">
+            <div class="f-copyright">
                 <p>&copy; Vijay Koushik 2018</p>
             </div>
         </footer>
