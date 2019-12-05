@@ -5,7 +5,10 @@
  */
 
 (function () {
-    this.DeviceCapabilities = function () {
+    /**
+     * @param {Object} windowObject - The browser window Object.
+     */
+    this.DeviceCapabilities = function (windowObject) {
         /**
         * @property {boolean} desktop - is device a desktop?
         * @private
@@ -113,10 +116,10 @@
          * @private
          * @readonly
          */
-        var ua = navigator.userAgent.toLocaleLowerCase();
+        var ua = windowObject.navigator.userAgent.toLocaleLowerCase();
 
         /**
-         * @property {Object} Sensors - Object wrapper for device's sensors. Use the Sensors object's properties to determine the different sensor apis suppported b the device.
+         * @property {Object} Sensors - Object wrapper for device's sensors. Use the Sensors object's properties to determine the different sensor apis supported b the device.
          * @property {boolean} Sensors.geoLocation - is geolocation supported?
          * @property {boolean} Sensors.touch -  is touch available?
          * @property {boolean} Sensors.orientation -  is orientation sensor available?
@@ -144,26 +147,26 @@
         else if (/kindle/.test(ua) || /kf[a-z][a-z]+/.test(ua) || /silk.*mobile safari/.test(ua)) {
             OS.kindle = true;
         }
+        else if (/android/.test(ua)) {
+            OS.android = true;
+        }
+        else if (/webos/.test(ua) || /hpwos/.test(ua)) {
+            OS.webOS = true;
+        }
         else if (/linux/.test(ua)) {
             OS.linux = true;
         }
         else if (/ip[oa]d|iphone/.test(ua)) {
             OS.iOS = true;
         }
-        else if (/mac os/.test(ua)) {
+        else if (/mac os/.test(ua) || /macintosh/.test(ua)) {
             OS.mac = true;
-        }
-        else if (/android/.test(ua)) {
-            OS.android = true;
         }
         else if (/blackberry|bb/.test(ua)) {
             OS.blackberry = true;
         }
-        else if (/webos/.test(ua)) {
-            OS.webOS = true;
-        }
 
-        //Windows phone gets a seperate check because it conflicts with windows pc check        
+        //Windows phone gets a separate check because it conflicts with windows pc check        
         if (/windows phone/.test(ua) || /iemobile/.test(ua)) {
             OS.windowsPhone = true;
             OS.android = false;
@@ -196,40 +199,40 @@
         else if (/firefox/.test(ua) && !/mobile|tablet/.test(ua)) {
             Browser.fireFox = true;
         }
+        else if (/iemobile/.test(ua) && /mobile|tablet/.test(ua)) {
+            Browser.ieMobile = true;
+        }
         else if (/msie|trident/.test(ua)) {
             Browser.ie = true;
         }
         else if (/opera/.test(ua)) {
             Browser.opera = true;
         }
-        else if (/safari/.test(ua) && !/mobile safari/.test(ua)) {
-            Browser.safari = true;
-        }
         else if (/edge/.test(ua) && OS.windowsPhone) {
             Browser.edgeMobile = true;
         }
-        else if (/chrome.*mobile safari/.test(ua) || /chrome.*crios/.test(ua)) {
+        else if (/chrome.*mobile safari/.test(ua) || /chrome.*crios/.test(ua) || /crios/.test(ua)) {
             Browser.chromeMobile = true;
+        }
+        else if (/safari/.test(ua) && !/mobile safari/.test(ua)) {
+            Browser.safari = true;
         }
         else if (/firefox|fxios/.test(ua) && /mobile|tablet/.test(ua)) {
             Browser.fireFoxMobile = true;
         }
-        else if (/iemobile/.test(ua) && /mobile|tablet/.test(ua)) {
-            Browser.ieMobile = true;
-        }
 
         //Check touch support
-        if ('ontouchstart' in window || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1) || (window.navigator.msMaxTouchPoints && window.navigator.msMaxTouchPoints > 1)) {
+        if ('ontouchstart' in windowObject || (windowObject.navigator.maxTouchPoints && windowObject.navigator.maxTouchPoints > 1) || (windowObject.navigator.msMaxTouchPoints && windowObject.navigator.msMaxTouchPoints > 1)) {
             Sensors.touch = true;
         }
 
         //Check gamepad support
-        if ('getGamepads' in navigator) {
+        if ('getGamepads' in windowObject.navigator) {
             gamepad = true;
         }
 
         //Check canvas support
-        if ('CanvasRenderingContext2D' in window) {
+        if ('CanvasRenderingContext2D' in windowObject) {
             canvas = true;
         }
 
@@ -239,22 +242,22 @@
         }
 
         //Check geolocation support
-        if (!!navigator.geolocation) {
+        if (!!windowObject.navigator.geolocation) {
             Sensors.geolocation = true;
         }
 
         //Check orientation support
-        if (!!window.ondeviceorientation) {
+        if (!!windowObject.ondeviceorientation) {
             Sensors.orientation = true;
         }
 
         //Check motion support
-        if (!!window.ondevicemotion) {
+        if (!!windowObject.ondevicemotion) {
             Sensors.motion = true;
         }
 
         //Check light sensor support
-        if ('ondevicelight' in window) {
+        if ('ondevicelight' in windowObject) {
             Sensors.ambientLight = true;
         }
 
@@ -645,7 +648,7 @@
          * @property {Object} WebBrowser - contains methods to detect the web browser from which the app/ page is being accessed.
          * @public
          */
-        this.WebBrowser = new WebBrowser();
+        this.Browser = new WebBrowser();
 
         /**
          * @property {Object} API - contains methods to check if a browser API is supported.
