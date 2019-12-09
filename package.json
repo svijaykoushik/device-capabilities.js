@@ -30,5 +30,13 @@
     "gulp": "^4.0.2",
     "gulp-uglify": "^3.0.2",
     "gulp-webserver": "^0.9.1"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-webserver": "^0.9.1"
   }
 }

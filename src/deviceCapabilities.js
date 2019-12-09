@@ -5,7 +5,10 @@
  */
 
 (function () {
-    this.DeviceCapabilities = function () {
+    /**
+     * @param {Object} windowObject - The browser window Object.
+     */
+    this.DeviceCapabilities = function (windowObject) {
         /**
         * @property {boolean} desktop - is device a desktop?
         * @private
@@ -113,10 +116,10 @@
          * @private
          * @readonly
          */
-        var ua = navigator.userAgent.toLocaleLowerCase();
+        var ua = "";
 
         /**
-         * @property {Object} Sensors - Object wrapper for device's sensors. Use the Sensors object's properties to determine the different sensor apis suppported b the device.
+         * @property {Object} Sensors - Object wrapper for device's sensors. Use the Sensors object's properties to determine the different sensor apis supported b the device.
          * @property {boolean} Sensors.geoLocation - is geolocation supported?
          * @property {boolean} Sensors.touch -  is touch available?
          * @property {boolean} Sensors.orientation -  is orientation sensor available?
@@ -134,6 +137,18 @@
             ambientLight: false
         };
 
+        if ('navigator' in windowObject) {//Check if the windowObject has user agent string
+            if ('userAgent' in windowObject.navigator) {
+                ua = windowObject.navigator.userAgent.toLocaleLowerCase();
+            }
+            else {
+                throw new Error("Property missing: \"window.navigator\" object expects the property \"userAgent\"");
+            }
+        }
+        else {
+            throw new Error("Property missing: \"window\" object expects the property \"navigator\"");
+        }
+
         // Check for OS of device
         if (/firefox/.test(ua) && !/windows/.test(ua) && !/linux/.test(ua) && !/mac os/.test(ua) && !/android/.test(ua)) {
             OS.firefoxOS = true;
@@ -144,26 +159,26 @@
         else if (/kindle/.test(ua) || /kf[a-z][a-z]+/.test(ua) || /silk.*mobile safari/.test(ua)) {
             OS.kindle = true;
         }
+        else if (/android/.test(ua)) {
+            OS.android = true;
+        }
+        else if (/webos/.test(ua) || /hpwos/.test(ua)) {
+            OS.webOS = true;
+        }
         else if (/linux/.test(ua)) {
             OS.linux = true;
         }
         else if (/ip[oa]d|iphone/.test(ua)) {
             OS.iOS = true;
         }
-        else if (/mac os/.test(ua)) {
+        else if (/mac os/.test(ua) || /macintosh/.test(ua)) {
             OS.mac = true;
-        }
-        else if (/android/.test(ua)) {
-            OS.android = true;
         }
         else if (/blackberry|bb/.test(ua)) {
             OS.blackberry = true;
         }
-        else if (/webos/.test(ua)) {
-            OS.webOS = true;
-        }
 
-        //Windows phone gets a seperate check because it conflicts with windows pc check        
+        //Windows phone gets a separate check because it conflicts with windows pc check        
         if (/windows phone/.test(ua) || /iemobile/.test(ua)) {
             OS.windowsPhone = true;
             OS.android = false;
@@ -196,65 +211,65 @@
         else if (/firefox/.test(ua) && !/mobile|tablet/.test(ua)) {
             Browser.fireFox = true;
         }
+        else if (/iemobile/.test(ua) && /mobile|tablet/.test(ua)) {
+            Browser.ieMobile = true;
+        }
         else if (/msie|trident/.test(ua)) {
             Browser.ie = true;
         }
         else if (/opera/.test(ua)) {
             Browser.opera = true;
         }
-        else if (/safari/.test(ua) && !/mobile safari/.test(ua)) {
-            Browser.safari = true;
-        }
         else if (/edge/.test(ua) && OS.windowsPhone) {
             Browser.edgeMobile = true;
         }
-        else if (/chrome.*mobile safari/.test(ua) || /chrome.*crios/.test(ua)) {
+        else if (/chrome.*mobile safari/.test(ua) || /chrome.*crios/.test(ua) || /crios/.test(ua)) {
             Browser.chromeMobile = true;
+        }
+        else if (/safari/.test(ua) && !/mobile safari/.test(ua)) {
+            Browser.safari = true;
         }
         else if (/firefox|fxios/.test(ua) && /mobile|tablet/.test(ua)) {
             Browser.fireFoxMobile = true;
         }
-        else if (/iemobile/.test(ua) && /mobile|tablet/.test(ua)) {
-            Browser.ieMobile = true;
-        }
 
         //Check touch support
-        if ('ontouchstart' in window || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1) || (window.navigator.msMaxTouchPoints && window.navigator.msMaxTouchPoints > 1)) {
+        if ('ontouchstart' in windowObject || (windowObject.navigator.maxTouchPoints && windowObject.navigator.maxTouchPoints > 1) || (windowObject.navigator.msMaxTouchPoints && windowObject.navigator.msMaxTouchPoints > 1)) {
             Sensors.touch = true;
         }
 
         //Check gamepad support
-        if ('getGamepads' in navigator) {
+        if ('getGamepads' in windowObject.navigator) {
             gamepad = true;
         }
 
         //Check canvas support
-        if ('CanvasRenderingContext2D' in window) {
+        if ('CanvasRenderingContext2D' in windowObject) {
             canvas = true;
         }
 
         //Check localStorage support
-        if (!!localStorage) {
+        if ('localStorage' in windowObject) {
             localStorage = true;
         }
 
         //Check geolocation support
-        if (!!navigator.geolocation) {
+        if (!!windowObject.navigator.geolocation) {
             Sensors.geolocation = true;
         }
 
         //Check orientation support
-        if (!!window.ondeviceorientation) {
+        if (!!windowObject.ondeviceorientation) {
             Sensors.orientation = true;
         }
 
         //Check motion support
-        if (!!window.ondevicemotion) {
+        if (!!windowObject.ondevicemotion) {
             Sensors.motion = true;
         }
 
         //Check light sensor support
-        if ('ondevicelight' in window) {
+        if ('ondevicelight' in windowObject) {
             Sensors.ambientLight = true;
         }
 
@@ -268,7 +283,7 @@
          * Contains the methods to check for the detected device.
          * @private
          */
-         var Device = function () {
+        var Device = function () {
             /**
              * @public
              * @method
@@ -300,7 +315,7 @@
          * Contains the methods to check for the device's platform.
          * @private
          */
-         var Platform = function () {
+        var Platform = function () {
 
             /**
              * @public
@@ -412,7 +427,7 @@
          * Contains the methods to check for the web browser used to access the app/ page.
          * @private
          */
-         var WebBrowser = function () {
+        var WebBrowser = function () {
             /**
              * @public
              * @method
@@ -422,14 +437,14 @@
             this.isChromeBrowser = function () {
                 return Browser.chrome
             }
-            
+
             /**
              * @public
              * @method
              * Checks if the web browser is Firefox.
              * @returns {boolean} true if the web browser is Firefox.
              */
-            this.isFireFoxBrowser = function(){
+            this.isFireFoxBrowser = function () {
                 return Browser.fireFox;
             }
 
@@ -439,7 +454,7 @@
              * Checks if the web browser is Opera.
              * @returns {boolean} true if the web browser is Opera.
              */
-            this.isOperaBrowser = function(){
+            this.isOperaBrowser = function () {
                 return Browser.opera;
             }
 
@@ -449,17 +464,17 @@
              * Checks if the web browser is Safari.
              * @returns {boolean} true if the web browser is Safari.
              */
-            this.isSafariBrowser = function(){
+            this.isSafariBrowser = function () {
                 return Browser.safari;
             }
-            
+
             /**
              * @public
              * @method
              * Checks if the web browser is Edge.
              * @returns {boolean} true if the web browser is Edge.
              */
-            this.isEdgeBrowser = function(){
+            this.isEdgeBrowser = function () {
                 return Browser.edge;
             }
 
@@ -469,7 +484,7 @@
              * Checks if the web browser is Internet Explorer.
              * @returns {boolean} true if the web browser is Internet Explorer.
              */
-            this.isIEBrowser  = function(){
+            this.isIEBrowser = function () {
                 return Browser.ie;
             }
 
@@ -479,7 +494,7 @@
              * Checks if the web browser is Chrome browser for mobile.
              * @returns {boolean} true if the web browser is Chrome browser for mobile.
              */
-            this.isChromeMobileBrowser = function(){
+            this.isChromeMobileBrowser = function () {
                 return Browser.chromeMobile;
             }
 
@@ -489,7 +504,7 @@
              * Checks if the web browser is Firefox for mobile.
              * @returns {boolean} true if the web browser is Firefox for mobile.
              */
-            this.isFireFoxMobileBrowser = function(){
+            this.isFireFoxMobileBrowser = function () {
                 return Browser.fireFoxMobile;
             }
 
@@ -499,7 +514,7 @@
              * Checks if the web browser is Internet Explorer for mobile.
              * @returns {boolean} true if the web browser is Internet Explorer for mobile.
              */
-            this.isIEMobileBrowser  = function(){
+            this.isIEMobileBrowser = function () {
                 return Browser.ieMobile;
             }
 
@@ -509,7 +524,7 @@
              * Checks if the web browser is Edge for mobile.
              * @returns {boolean} true if the web browser is Edge for mobile.
              */
-            this.isEdgeMobileBrowser = function(){
+            this.isEdgeMobileBrowser = function () {
                 return Browser.edgeMobile;
             }
 
@@ -519,7 +534,7 @@
              * Checks if the web browser is Android's default browser.
              * @returns {boolean} true if the web browser is Android's default browser.
              */
-            this.isAndroidDefaultBrowser = function(){
+            this.isAndroidDefaultBrowser = function () {
                 return Browser.androidBrowser;
             }
 
@@ -529,7 +544,7 @@
              * Checks if the web browser is Silk Browser.
              * @returns {boolean} true if the web browser is Silk Browser.
              */
-            this.isSilkBrowser =function(){
+            this.isSilkBrowser = function () {
                 return Browser.silk;
             }
         }
@@ -543,14 +558,14 @@
          * Contains the methods to check for the support of browser APIs.
          * @private
          */
-         var API = function(){
+        var API = function () {
             /**
              * @public
              * @method
              * Checks if the browser supports local storage API.
              * @returns {boolean} true if the browser supports local storage API.
              */
-            this.hasLocalStorageAPI = function(){
+            this.hasLocalStorageAPI = function () {
                 return localStorage;
             }
 
@@ -560,7 +575,7 @@
              * Checks if the browser supports gamepad API.
              * @returns {boolean} true if the browser supports gamepad API.
              */
-            this.hasGamepadAPI = function(){
+            this.hasGamepadAPI = function () {
                 return gamepad;
             }
 
@@ -570,7 +585,7 @@
              * Checks if the browser supports geo-location API.
              * @returns {boolean} true if the browser supports geo-location API.
              */
-            this.hasGeolocationAPI = function(){
+            this.hasGeolocationAPI = function () {
                 return Sensors.geolocation;
             }
 
@@ -580,7 +595,7 @@
              * Checks if the browser supports touch API.
              * @returns {boolean} true if the browser supports touch API.
              */
-            this.hasTouchAPI = function(){
+            this.hasTouchAPI = function () {
                 return Sensors.touch;
             }
 
@@ -590,7 +605,7 @@
              * Checks if the browser supports device orientation API.
              * @returns {boolean} true if the browser supports device orientation API.
              */
-            this.hasDeviceOrientationAPI  = function(){
+            this.hasDeviceOrientationAPI = function () {
                 return Sensors.orientation;
             }
 
@@ -600,7 +615,7 @@
              * Checks if the browser supports device motion API.
              * @returns {boolean} true if the browser supports device motion API.
              */
-            this.hasDeviceMotionAPI = function(){
+            this.hasDeviceMotionAPI = function () {
                 return Sensors.motion;
             }
 
@@ -610,7 +625,7 @@
              * Checks if the browser supports device light API.
              * @returns {boolean} true if the browser supports device light API.
              */
-            this.hasDeviceLightAPI = function(){
+            this.hasDeviceLightAPI = function () {
                 return Sensors.ambientLight;
             }
 
@@ -620,7 +635,7 @@
              * Checks if the browser supports HTML5 canvas API.
              * @returns {boolean} true if the browser supports HTML5 canvas API.
              */
-            this.hasCanvasAPI = function(){
+            this.hasCanvasAPI = function () {
                 return canvas;
             }
         }
@@ -631,21 +646,25 @@
 
         /**
          * @property {Object} Device - contains methods to detect the type of device (mobile or desktop).
+         * @public
          */
-         this.Device = new Device();
+        this.Device = new Device();
 
         /**
          * @property {Object} Platform - contains methods to detect the device's platform.
+         * @public
          */
         this.Platform = new Platform();
 
         /**
-         * @property {Object} WebBrowser - contains methods to detect the web browser from which the app/ page is being accessed..
+         * @property {Object} WebBrowser - contains methods to detect the web browser from which the app/ page is being accessed.
+         * @public
          */
-        this.WebBrowser = new WebBrowser();
+        this.Browser = new WebBrowser();
 
         /**
          * @property {Object} API - contains methods to check if a browser API is supported.
+         * @public
          */
         this.API = new API();
     }
